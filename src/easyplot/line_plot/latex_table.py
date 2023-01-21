@@ -15,10 +15,10 @@ from typeguard import typechecked
 # replace this with your own table creation and then pass it to
 # put_table_in_tex(..)
 @typechecked
-def example_create_a_table() -> None:
+def example_create_a_table(output_dir: str, filename: str) -> None:
     """Example on how to create a latex table from Python."""
 
-    table_name = "example_table_name"
+    filename = "filename"
     rows = 2
     columns = 4
     table_matrix = np.zeros((rows, columns), dtype=object)
@@ -29,13 +29,21 @@ def example_create_a_table() -> None:
     table_matrix[1, 0] = "example"
     table_matrix[0, 1] = "grid sizes"
 
-    put_table_in_tex(table_matrix=table_matrix, filename=table_name)
+    put_table_in_tex(
+        filename=filename,
+        output_dir=output_dir,
+        table_matrix=table_matrix,
+    )
 
 
 # Create a table with: table_matrix = np.zeros((4,4),dtype=object) and pass
 # it to this object
 @typechecked
-def put_table_in_tex(table_matrix: np.ndarray, filename: str) -> None:
+def put_table_in_tex(
+    filename: str,
+    output_dir: str,
+    table_matrix: np.ndarray,
+) -> None:
     """This table can be directly plotted into latex by putting the commented
     code below into your latex file at the position where you want your
     table:"""
@@ -60,7 +68,7 @@ def put_table_in_tex(table_matrix: np.ndarray, filename: str) -> None:
     # TODO: Change to something else to save as txt.
     os.mkdir("latex/tables/")
     np.savetxt(
-        "latex/" + "tables/" + filename + ".txt",
+        f"{output_dir}/{filename}.txt",
         table_matrix,
         delimiter=" & ",
         # fmt=format,  # type: ignore[arg-type]
