@@ -3,6 +3,9 @@ import argparse
 
 from typeguard import typechecked
 
+from src.easyplot.line_plot.latex_table import example_create_a_table
+from src.easyplot.line_plot.line_plot import example_create_multi_line_plot
+
 
 @typechecked
 def process_args(args: argparse.Namespace, default_output_path: str) -> None:
@@ -19,7 +22,8 @@ def process_args(args: argparse.Namespace, default_output_path: str) -> None:
         print("TODO: Create box plot.")
 
     if args.line_plot:
-        print("TODO: Create line plot.")
+        example_create_multi_line_plot()
 
     if args.latex_table:
         print("TODO: Create LaTex table.")
+        example_create_a_table()
