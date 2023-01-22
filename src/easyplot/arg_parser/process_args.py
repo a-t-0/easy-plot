@@ -3,8 +3,9 @@ import argparse
 
 from typeguard import typechecked
 
+from src.easyplot.box_plot.box_plot import example_box_plot
 from src.easyplot.export_plot import create_target_dir_if_not_exists
-from src.easyplot.line_plot.latex_table import example_create_a_table
+from src.easyplot.latex_table.latex_table import example_create_a_table
 from src.easyplot.line_plot.line_plot import example_create_multi_line_plot
 
 
@@ -21,14 +22,20 @@ def process_args(args: argparse.Namespace, default_output_path: str) -> None:
         print("TODO: delete images.")
 
     if args.box_plot:
-        print("TODO: Create box plot.")
+        example_box_plot(
+            extensions=[
+                ".png",
+            ],
+            filename="example_box",
+            output_dir=default_output_path,
+        )
 
     if args.line_plot:
         example_create_multi_line_plot(
             extensions=[
                 ".png",
             ],
-            filename="example",
+            filename="example_line",
             output_dir=default_output_path,
         )
 

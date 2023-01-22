@@ -39,8 +39,8 @@ def example_create_multi_line_plot(
         legendPosition=0,
         output_dir=output_dir,
         x=single_x_series,
-        x_label="x-axis label [units]",
-        y_label="y-axis label [units]",
+        x_axis_label="x-axis label [units]",
+        y_axis_label="y-axis label [units]",
         y_series=multiple_y_series,
     )
 
@@ -54,24 +54,21 @@ def plot_multiple_lines(
     legendPosition: int,
     output_dir: str,
     x: List,
-    x_label: str,
-    y_label: str,
+    x_axis_label: str,
+    y_axis_label: str,
     y_series: np.ndarray,
 ) -> None:
     """
 
     :param x:
     :param y_series:
-    :param x_label:
-    :param y_label:
+    :param x_axis_label:
+    :param y_axis_label:
     :param label:
     :param filename:
     :param legendPosition:
     :param y_series:
-    :param y_label:
     :param filename:
-    :param y_label:
-    :
     """
     # pylint: disable=R0913
     # TODO: reduce 9/5 arguments to at most 5/5 arguments.
@@ -96,8 +93,8 @@ def plot_multiple_lines(
 
     # configure plot layout
     plt.legend(loc=legendPosition)
-    plt.xlabel(x_label)
-    plt.ylabel(y_label)
+    plt.xlabel(x_axis_label)
+    plt.ylabel(y_axis_label)
     for extension in extensions:
         plt.savefig(f"{output_dir}/{filename}{extension}")
     plt.clf()
