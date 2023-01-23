@@ -23,25 +23,17 @@ def example_box_plot(
     first = [39, 44, 50, 50, 58, 63]
     second = [80, 100, 100, 120]
 
-    x_labels = [
-        "data_1",
-        "data_2",
-    ]
-    y_series = [first, second]
-
-    # Add a name for each boxplot for in the legend.
-    lineLabels = [
-        "first-line",
-        "second_line",
-    ]
+    # Add a name for each boxplot for in the legend, and y values.
+    y_series = {
+        "data_1":first,
+        "data_2": second
+    }
 
     create_box_plot(
         extensions=extensions,
         filename=filename,
-        label=lineLabels,
         legendPosition=0,
         output_dir=output_dir,
-        x_labels=x_labels,
         x_axis_label="x-axis label [units]",
         y_axis_label="y-axis label [units]",
         y_series=y_series,
@@ -94,9 +86,8 @@ def create_box_plot(
     legendPosition: int,
     output_dir: str,
     x_axis_label: str,
-    x_labels: List[str],
     y_axis_label: str,
-    y_series: List[List[Union[int, float]]],
+    y_series: Dict[str,List[Union[int, float]]],
 ) -> None:
     """
     TODO: remove labels and legend they are double up because they are already
@@ -115,11 +106,11 @@ def create_box_plot(
     :
     """
     _, ax1 = plt.subplots()
-    ax1.set_xticklabels(x_labels)
+    ax1.set_xticklabels(list(y_series.keys()))
     ax1.set_title("Basic Plot")
 
     # Create box plot, patch_artist is to colour the boxes.
-    box_plot = ax1.boxplot(x=y_series, patch_artist=True)
+    box_plot = ax1.boxplot(x=list(y_series.values()), patch_artist=True)
     set_boxplot_colours(
         box_plot=box_plot, colour_pattern="hsv", nr_of_colours=len(y_series)
     )
