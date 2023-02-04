@@ -5,17 +5,8 @@
 # First run: conda env create --file environment.yml
 # If you change this file, run: conda env update --file environment.yml
 
-# Instructions for this networkx-to-lava-nc repository only. First time usage
-# On Ubuntu (this is needed for lava-nc):
-# sudo apt upgrade
-# sudo apt full-upgrade
-# yes | sudo apt install gcc
-
-# For code structure visualisation:
-# yes | sudo apt install graphviz
-
 # Conda configuration settings. (Specify which modules/packages are installed.)
-name: easyplot
+name: simplt
 channels:
   - conda-forge
 dependencies:

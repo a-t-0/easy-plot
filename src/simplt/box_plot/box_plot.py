@@ -1,5 +1,5 @@
 """Creates a box plot."""
-from typing import Dict, List, Union
+from typing import Dict, List, Union, Optional
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -24,10 +24,7 @@ def example_box_plot(
     second = [80, 100, 100, 120]
 
     # Add a name for each boxplot for in the legend, and y values.
-    y_series = {
-        "data_1":first,
-        "data_2": second
-    }
+    y_series = {"data_1": first, "data_2": second}
 
     create_box_plot(
         extensions=extensions,
@@ -55,7 +52,6 @@ def set_boxplot_colours(
 
     # Apply the colours to the boxplots.
     for patch, color in zip(box_plot["boxes"], hex_colours):
-        print(f"color={color}")
         patch.set_facecolor(color)
 
 
@@ -73,7 +69,6 @@ def get_hex_boxplot_colours(
         rgba = colours(i)
 
         # rgb2hex accepts rgb or rgba
-        print(matplotlib.colors.rgb2hex(rgba))
         hex_colours.append(matplotlib.colors.rgb2hex(rgba))
     return hex_colours
 
@@ -87,7 +82,9 @@ def create_box_plot(
     output_dir: str,
     x_axis_label: str,
     y_axis_label: str,
-    y_series: Dict[str,List[Union[int, float]]],
+    y_series: Dict[str, List[Union[int, float]]],
+    title:Optional[str]="",
+    x_axis_label_rotation: Optional[int]=0,
 ) -> None:
     """
     TODO: remove labels and legend they are double up because they are already
@@ -106,8 +103,13 @@ def create_box_plot(
     :
     """
     _, ax1 = plt.subplots()
-    ax1.set_xticklabels(list(y_series.keys()))
-    ax1.set_title("Basic Plot")
+
+    # ha stands for horizontal alignment, the top right of the x-axis label
+    # is positioned below the respective x-tick.
+    ax1.set_xticklabels(list(y_series.keys()),rotation=x_axis_label_rotation, ha='right')
+    plt.tight_layout() # Ensure the bottom x-tick labels are within the image.
+    #plt.xticks(rotation=45, ha='right')
+    ax1.set_title(title)
 
     # Create box plot, patch_artist is to colour the boxes.
     box_plot = ax1.boxplot(x=list(y_series.values()), patch_artist=True)
@@ -120,6 +122,6 @@ def create_box_plot(
     plt.xlabel(x_axis_label)
     plt.ylabel(y_axis_label)
     for extension in extensions:
-        plt.savefig(f"{output_dir}/{filename}{extension}")
+        plt.savefig(f"{output_dir}/{filename}.{extension}")
     plt.clf()
     plt.close()

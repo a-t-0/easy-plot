@@ -1,4 +1,4 @@
-"""Packaging logic for easyplot."""
+"""Packaging logic for simplt."""
 from __future__ import annotations
 
 import os

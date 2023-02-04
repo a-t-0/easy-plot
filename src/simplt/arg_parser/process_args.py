@@ -3,10 +3,10 @@ import argparse
 
 from typeguard import typechecked
 
-from src.easyplot.box_plot.box_plot import example_box_plot
-from src.easyplot.export_plot import create_target_dir_if_not_exists
-from src.easyplot.latex_table.latex_table import example_create_a_table
-from src.easyplot.line_plot.line_plot import example_create_multi_line_plot
+from src.simplt.box_plot.box_plot import example_box_plot
+from src.simplt.export_plot import create_target_dir_if_not_exists
+from src.simplt.latex_table.latex_table import example_create_a_table
+from simplt.line_plot.line_plot import example_create_multi_line_plot
 
 
 @typechecked
